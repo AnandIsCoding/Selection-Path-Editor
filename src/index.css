@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-gray-100;
+}
+
+.input {
+  @apply w-full border p-2 rounded;
+}
+
+/* index.css */
+.a4-page {
+  width: 794px;
+  min-height: 1123px;
+  padding: 40px;
+  position: relative;
+  background: white;
+}
+
