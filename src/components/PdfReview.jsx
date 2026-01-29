@@ -59,7 +59,7 @@ export default function PdfPreview({ entries, onEdit, isPdfMode, titleColor, pdf
         <div className="relative z-10 text-center mb-10">
   {/* TITLE */}
   <h1
-    className="text-[32px] font-extrabold tracking-wide underline underline-offset-4"
+    className="text-[32px] font-extrabold tracking-wide "
     style={{
       color: titleColor,
       textShadow: `
@@ -100,7 +100,7 @@ export default function PdfPreview({ entries, onEdit, isPdfMode, titleColor, pdf
                       – {e.en}
                     </p>
 
-                    <p className="mt-1 inline-block bg-blue-100 px-2 py-[2px] rounded text-[16px]">
+                    <p className="mt-1 inline-block bg-blue-100 px-2 py-[4px] rounded text-[16px]">
                       {e.hi}
                     </p>
 
