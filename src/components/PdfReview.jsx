@@ -1,4 +1,4 @@
-export default function PdfPreview({ entries, onEdit, isPdfMode }) {
+export default function PdfPreview({ entries, onEdit, isPdfMode, titleColor, pdfTitle }) {
   const today = new Date().toLocaleDateString("en-GB");
   
   // Logic to split entries into chunks of 6
@@ -56,10 +56,32 @@ export default function PdfPreview({ entries, onEdit, isPdfMode }) {
 )}
 
           {/* TITLE */}
-          <h1 className="relative z-10 text-center text-[24px] font-bold text-blue-700 mb-6 underline mb-6">
-            ONE WORD SUBSTITUTION{" "}
-            <span className="text-black">{today}</span>
-          </h1>
+        <div className="relative z-10 text-center mb-10">
+  {/* TITLE */}
+  <h1
+    className="text-[32px] font-extrabold tracking-wide underline underline-offset-4"
+    style={{
+      color: titleColor,
+      textShadow: `
+        1px 1px 0 rgba(0,0,0,0.25),
+        2px 2px 0 rgba(0,0,0,0.15),
+        3px 3px 0 rgba(0,0,0,0.08)
+      `,
+    }}
+  >
+    {pdfTitle || "ONE WORD SUBSTITUTION"}
+  </h1>
+
+  {/* DATE */}
+  <p className="mt-2 text-[12px] tracking-widest uppercase text-gray-500">
+    {today}
+  </p>
+
+  {/* SUBTLE DIVIDER */}
+  <div className="mx-auto mt-3 h-[1px] w-24 bg-gradient-to-r from-transparent via-gray-400 to-transparent" />
+</div>
+
+
 
           {/* CONTENT */}
           <div className="space-y-6">

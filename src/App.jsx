@@ -9,6 +9,10 @@ export default function App() {
   const [editingIndex, setEditingIndex] = useState(null);
   const [isPdfMode, setIsPdfMode] = useState(false);
 
+  // New states
+  const [pdfTitle, setPdfTitle] = useState("ONE WORD SUBSTITUTION");
+  const [titleColor, setTitleColor] = useState("#000000"); // Default blue
+
   const handleAddOrUpdate = (entry) => {
     if (editingIndex !== null) {
       setEntries((prev) =>
@@ -21,9 +25,65 @@ export default function App() {
   };
 
   return (
-    <div className="flex gap-6 p-6">
+    <div className="flex flex-col md:flex-row gap-6 p-2 md:p-6">
+
+    
       {/* LEFT PANEL */}
-      <div className="w-1/3 space-y-4">
+      <div className="md:w-1/3 space-y-4">
+        <div className="space-y-3 rounded-xl border bg-white p-4 shadow-sm">
+  {/* LABEL */}
+  <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+    PDF Title
+  </p>
+
+  {/* TITLE INPUT */}
+  <input
+    type="text"
+    placeholder="Enter PDF title"
+    value={pdfTitle}
+    onChange={(e) => setPdfTitle(e.target.value)}
+    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm
+               focus:border-blue-500 focus:ring-2 focus:ring-blue-200
+               outline-none transition"
+  />
+
+  {/* COLOR PICKER ROW */}
+ <div className="flex items-center justify-between pt-2">
+  <span className="text-xs font-medium text-gray-600">
+    Pick Title Color
+  </span>
+
+  <div className="flex items-center gap-3">
+    {/* Color Code */}
+    <span className="text-[11px] font-mono text-gray-500 uppercase">
+      {titleColor}
+    </span>
+
+    {/* Reset Button */}
+    <button
+      type="button"
+      onClick={() => setTitleColor("#000000")} // default
+      className="text-[11px] font-semibold text-gray-500
+                 hover:text-red-600 transition"
+      title="Reset to default color"
+    >
+      Reset
+    </button>
+
+    {/* Color Picker */}
+    <input
+      type="color"
+      value={titleColor}
+      onChange={(e) => setTitleColor(e.target.value)}
+      className="h-8 w-8 cursor-pointer rounded-full overflow-hidden"
+    />
+  </div>
+</div>
+
+</div>
+
+
+
         <WordForm
           onSubmit={handleAddOrUpdate}
           editingEntry={editingIndex !== null ? entries[editingIndex] : null}
@@ -36,13 +96,14 @@ export default function App() {
           }
         />
 
-       <button
-  onClick={() => generatePdf(entries)}
-  className="w-full bg-green-600 text-white py-2 rounded"
->
-  Generate PDF
-</button>
+      
 
+        <button
+          onClick={() => generatePdf(entries, pdfTitle)}
+          className="w-full bg-green-600 text-white py-2 rounded"
+        >
+          Generate PDF
+        </button>
       </div>
 
       {/* RIGHT PANEL */}
@@ -51,6 +112,8 @@ export default function App() {
           entries={entries}
           onEdit={(i) => setEditingIndex(i)}
           isPdfMode={isPdfMode}
+          pdfTitle={pdfTitle}
+          titleColor={titleColor}
         />
       </div>
     </div>
